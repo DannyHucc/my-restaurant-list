@@ -13,10 +13,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "config-file": "file:config",
     "express": "^4.17.1",
-    "mongoose": "^5.9.7",
+    "express-handlebars": "^4.0.2",
     "models-file": "file:models",
-    "config-file": "file:config"
+    "mongoose": "^5.9.7"
   },
   "devDependencies": {
     "dotenv": "^16.0.3"
