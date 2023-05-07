@@ -1,8 +1,10 @@
 const express = require('express')
+const router = express.Router()
 const home = require('./modules/home')
 const restaurants = require('./modules/restaurants')
-const router = express.Router()
+const search = require('./modules/search')
 
+router.use('/search', search)
 router.use('/restaurants', restaurants)
 router.use('/', home)
 

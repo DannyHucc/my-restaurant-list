@@ -5,6 +5,7 @@ const router = express.Router()
 router.get('/', (req, res) => {
     Restaurants.find()
         .lean()
+        .sort({ _id: 'asc' })
         .then(restaurants => res.render('index', { restaurants }))
         .catch(error => console.error(error))
 })
