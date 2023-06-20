@@ -39,7 +39,8 @@ header {
     font-size: 0.8rem;
 }
 
-.btn-major {
+.btn-major,
+.span-sort {
     background-color: #9b4b4b;
     color: white;
 }

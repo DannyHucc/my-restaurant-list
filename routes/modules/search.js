@@ -3,8 +3,8 @@ const router = express.Router()
 const Restaurants = require('models-file/restaurant')
 
 router.get('/', (req, res) => {
-    const keywords = req.query.keywords.trim().toLowerCase()
-    if (!keywords) { return res.render('error'), { keywords } }
+    const keywords = req.query.keywords
+    const sort = req.query.sort
 
     Restaurants.find({
         $or: [
@@ -14,10 +14,16 @@ router.get('/', (req, res) => {
         ]
     })
         .lean()
+        .sort(sort)
         .then((filterRestaurants) => {
             if (filterRestaurants.length) {
                 return res.render("index",
-                    { restaurants: filterRestaurants, keywords })
+                    {
+                        restaurants: filterRestaurants,
+                        keywords,
+                        sort,
+                        javascript: 'index.js'
+                    })
             } else {
                 return res.render('error', { keywords })
             }

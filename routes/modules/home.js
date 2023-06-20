@@ -6,7 +6,11 @@ router.get('/', (req, res) => {
     Restaurants.find()
         .lean()
         .sort({ _id: 'asc' })
-        .then(restaurants => res.render('index', { restaurants }))
+        .then(restaurants => res.render('index',
+            {
+                restaurants,
+                javascript: 'index.js'
+            }))
         .catch(error => console.error(error))
 })
 
