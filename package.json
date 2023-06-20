@@ -17,6 +17,7 @@
     "config-file": "file:config",
     "express": "^4.17.1",
     "express-handlebars": "^4.0.2",
+    "method-override": "^3.0.0",
     "models-file": "file:models",
     "mongoose": "^5.9.7"
   },

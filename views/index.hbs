@@ -42,6 +42,20 @@
                                 </span>
 
                             </div>
+
+                            <div class="card-footer">
+                                <div class="d-flex flex-row justify-content-end">
+                                    <form action="/restaurants/{{ this._id }}/edit" method="GET">
+                                        <button type="submit"
+                                            class="btn btn-primary btn-sm text-white m-1">Edit</button>
+                                    </form>
+                                    <form action="/restaurants/{{ this._id }}/detail" method="GET">
+                                        <button type="submit"
+                                            class="btn btn-secondary btn-sm text-white m-1">Details</button>
+                                    </form>
+                                </div>
+                            </div>
+
                         </div>
                     </a>
                 </div>
