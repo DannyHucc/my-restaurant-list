@@ -35,6 +35,14 @@ router.put('/:id/edit', (req, res) => {
     const id = req.params.id
     return Restaurants.findByIdAndUpdate(id, req.body)
         .then(() => res.redirect(`/restaurants/${id}/detail`))
+        .catch((error) => console.log(error))
+})
+
+router.delete('/:id/delete', (req, res) => {
+    const id = req.params.id
+    return Restaurants.findById(id, req.body)
+        .then((restaurant) => restaurant.remove())
+        .then(() => res.redirect(`/`))
         .catch(error => console.log(error))
 })
 
