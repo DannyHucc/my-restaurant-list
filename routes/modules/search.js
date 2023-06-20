@@ -16,7 +16,8 @@ router.get('/', (req, res) => {
         .lean()
         .then((filterRestaurants) => {
             if (filterRestaurants.length) {
-                return res.render("index", { restaurants: filterRestaurants, keywords })
+                return res.render("index",
+                    { restaurants: filterRestaurants, keywords })
             } else {
                 return res.render('error', { keywords })
             }

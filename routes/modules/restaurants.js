@@ -12,4 +12,13 @@ router.post('/', (req, res) => {
         .catch(err => console.log(err))
 })
 
+router.get('/:id/detail', (req, res) => {
+    const id = req.params.id
+    return Restaurants.findById(id)
+        .lean()
+        .then((restaurant) => res.render('detail',
+            { restaurant }))
+        .catch((error) => console.log(error))
+})
+
 module.exports = router
