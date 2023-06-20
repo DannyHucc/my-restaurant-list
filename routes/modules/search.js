@@ -8,9 +8,9 @@ router.get('/', (req, res) => {
 
     Restaurants.find({
         $or: [
-            { name: { $regex: keywords } },
-            { name_en: { $regex: keywords } },
-            { category: { $regex: keywords } }
+            { name: { $regex: keywords, $options: 'xi' } },
+            { name_en: { $regex: keywords, $options: 'xi' } },
+            { category: { $regex: keywords, $options: 'xi' } }
         ]
     })
         .lean()
