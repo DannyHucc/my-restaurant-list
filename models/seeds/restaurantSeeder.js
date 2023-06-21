@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
 const bcrypt = require('bcryptjs')
 const restaurantList = require('models-file/seeds/restaurantList.json').results
 const userList = require('models-file/seeds/userList.json').users
-const Restaurant = require('models-file/restaurant')
+const Restaurants = require('models-file/restaurant')
 const User = require('models-file/user')
 const db = require('config-file/mongoose')
 
@@ -27,7 +27,7 @@ db.once("open", () => {
                     return restaurant
                 })
                 // create seed restaurants to user
-                return Restaurant.create(restaurants)
+                return Restaurants.create(restaurants)
             })
     }))
         .then(() => {
