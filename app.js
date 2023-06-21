@@ -33,8 +33,15 @@ app.use(session({
     saveUninitialized: true
 }))
 
-// middleware: passport initialize and authenticate
+// middleware: passport initialize
 usePassport(app)
+
+// middleware: authenticate
+app.use((req, res, next) => {
+    res.locals.isAuthenticated = req.isAuthenticated()
+    res.locals.user = req.user
+    next()
+})
 
 // middleware: routes
 app.use(routes)
