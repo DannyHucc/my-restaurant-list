@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const FacebookStrategy = require('passport-facebook').Strategy
+const GoogleStrategy = require('passport-google-oauth20').Strategy
 const User = require('models-file/user')
 
 module.exports = app => {
@@ -43,6 +44,16 @@ module.exports = app => {
         thirdPartyOAuth
     ))
 
+    // Google Strategy
+    passport.use(new GoogleStrategy(
+        {
+            clientID: process.env.GOOGLE_ID,
+            clientSecret: process.env.GOOGLE_SECRET,
+            callbackURL: process.env.GOOGLE_CALLBACK
+        },
+        thirdPartyOAuth
+    ))
+
     // Session
     passport.serializeUser((user, done) => {
         done(null, user.id)
@@ -60,6 +71,7 @@ module.exports = app => {
 
 // callback function for third party login strategy
 async function thirdPartyOAuth(accessToken, refreshToken, profile, done) {
+    console.log(profile._json)
     const { name, email } = profile._json
     try {
         let user = await User.findOne({ email })
