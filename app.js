@@ -13,7 +13,7 @@ const flash = require('connect-flash')
 const routes = require('./routes')
 require('./config/mongoose')
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT
 
 // template engine: express-handlebars
 app.engine('hbs', exphbs({
@@ -29,7 +29,7 @@ app.use(methodOverride('_method'))
 
 // middleware: session
 app.use(session({
-    secret: 'ThisIsMySecret',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true
 }))
