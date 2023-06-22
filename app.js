@@ -9,6 +9,7 @@ const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const usePassport = require('config-file/passport')
+const flash = require('connect-flash')
 const routes = require('./routes')
 require('./config/mongoose')
 const app = express()
@@ -36,10 +37,13 @@ app.use(session({
 // middleware: passport initialize
 usePassport(app)
 
-// middleware: authenticate
+// middleware: flash and authenticate
+app.use(flash())
 app.use((req, res, next) => {
     res.locals.isAuthenticated = req.isAuthenticated()
     res.locals.user = req.user
+    res.locals.success_msg = req.flash('success_msg')
+    res.locals.warning_msg = req.flash('warning_msg')
     next()
 })
 

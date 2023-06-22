@@ -2,6 +2,7 @@
     <div class="col-md-5 m-auto">
         <div class="card card-body">
             <h1 class="text-center mt-3">Register</h1>
+            {{>message}}
             <form action="/users/register" method="POST">
                 <div class="mb-3">
                     <label for="name" class="mb-2">Name</label>
@@ -18,7 +19,7 @@
                     <input type="password" id="password" name="password" class="form-control"
                         placeholder="Enter Password" required value="{{ password }}">
                     <small id="passwordHelpBlock" class="form-text text-muted">
-                        Your password must be 8-20 characters long, contain letters and numbers.
+                        Your password must be 8-20 characters long, contain letters and numbers and symbols.
                     </small>
                 </div>
                 <div class="mb-3">
