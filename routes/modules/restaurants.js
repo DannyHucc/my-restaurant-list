@@ -3,7 +3,8 @@ const router = express.Router()
 const Restaurants = require('models-file/restaurant')
 
 router.get('/new', (req, res) => {
-    res.render('new')
+    res.render('new',
+        { javascript: ['new.js'] })
 })
 
 router.post('/', (req, res) => {
