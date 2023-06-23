@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Restaurants = require('models-file/restaurant')
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
     const keywords = req.query.keywords
     const userId = req.user._id
     const sort = req.query.sort
@@ -25,16 +25,16 @@ router.get('/', (req, res) => {
             if (filterRestaurants.length) {
                 return res.render("index",
                     {
-                        restaurants: filterRestaurants,
-                        keywords,
                         sort,
-                        javascript: 'index.js'
+                        keywords,
+                        search: 'search',
+                        javascript: 'index.js',
+                        restaurants: filterRestaurants
                     })
-            } else {
-                return res.render('error', { keywords })
             }
+            return res.render('index', { keywords, searchNotFound: 'searchNotFound' })
         })
-        .catch(err => console.log(err))
+        .catch(error => next(error))
 })
 
 module.exports = router
