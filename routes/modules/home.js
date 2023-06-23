@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
         .then(restaurants => res.render('index',
             {
                 restaurants,
-                javascript: 'index.js'
+                javascript: ['index.js']
             }))
         .catch(error => console.error(error))
 })
