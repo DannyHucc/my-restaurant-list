@@ -1,6 +1,7 @@
 const express = require('express')
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
+const validator = require('validator')
 const User = require('models-file/user')
 const router = express.Router()
 
@@ -17,15 +18,19 @@ router.get('/register', (req, res) => {
     res.render('register')
 })
 
-router.post('/register', async (req, res) => {
+router.post('/register', async (req, res, next) => {
     try {
         const { name, email, password, confirmPassword } = req.body
         const errors = []
-        const passwordRegex = 
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#$%^&*()_+-={}\[\]\\:;"'<>?,.\/])[A-Za-z\d~!@#$%^&*()_+-={}\[\]\\:;"'<>?,.\/]{8,20}$/
-
+        const passwordRegex =
+            /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#$%^&*()_+-={}\[\]\\:;"'<>?,.\/])[A-Za-z\d~!@#$%^&*()_+-={}\[\]\\:;"'<>?,.\/]{8,20}$/
+        // check if the register info is valid
         if (!email.trim() || !passport || !confirmPassword) {
             errors.push({ message: 'Please fill in email, password, and confirm password fields.' })
+        }
+
+        if (!validator.isEmail(email)) {
+            errors.push({ message: 'Email address is invalid.' })
         }
 
         if (!passwordRegex.test(password)) {
@@ -39,20 +44,20 @@ router.post('/register', async (req, res) => {
         if (errors.length) {
             return res.render('register', { errors, name, email, password, confirmPassword })
         }
-
+        // check if the email already exists
         const isUserExisted = await User.exists({ email })
         if (isUserExisted) {
             errors.push({ message: 'User already exists!' })
             return res.render('register', { errors, name, email, password, confirmPassword })
         }
-
+        // create the user register information
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(password, salt, null)
         await User.create({ name, email, password: hash })
         req.flash('success_msg', 'Register successfully! Please login to your account.')
         return res.redirect('/users/login')
     } catch (error) {
-        console.error(error)
+        next(error)
     }
 })
 
