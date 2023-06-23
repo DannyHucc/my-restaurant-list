@@ -96,3 +96,27 @@ header {
         height: auto;
     }
 }
+
+/* Facebook button for login and register page */
+.loginBtn-facebook {
+    background-color: #4C69BA;
+    background-image: linear-gradient(#4C69BA, #3B55A0);
+}
+
+.loginBtn-facebook:hover,
+.loginBtn-facebook:focus {
+    background-color: #5B7BD5;
+    background-image: linear-gradient(#5B7BD5, #4864B1)
+}
+
+/* Google button for login and register page */
+.loginBtn-google {
+    background-color: #DF5543;
+    background-image: linear-gradient(#DF5543, #CC4A35)
+}
+
+.loginBtn-google:hover,
+.loginBtn-google:focus {
+    background-color: #E56555;
+    background-image: linear-gradient(#E56555, #C65040)
+}
