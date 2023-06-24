@@ -1,9 +1,14 @@
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+}
+
 const express = require('express')
 const router = express.Router()
 const Restaurants = require('models-file/restaurant')
 
 router.get('/new', (req, res) => {
-    res.render('new', { javascript: ['new.js'] })
+    const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY
+    res.render('new', { javascript: ['new.js', 'autofill.js'], GOOGLE_API_KEY })
 })
 
 router.post('/', (req, res, next) => {
