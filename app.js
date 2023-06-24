@@ -8,6 +8,7 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
 const session = require('express-session')
+const MongoStore = require('connect-mongo')
 const usePassport = require('config-file/passport')
 const flash = require('connect-flash')
 const routes = require('./routes')
@@ -30,8 +31,19 @@ app.use(methodOverride('_method'))
 // middleware: session
 app.use(session({
     secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true
+    resave: false, //don't save session if unmodified
+    saveUninitialized: true, // don't create session until something stored
+    store: MongoStore.create({ // configure a new connection
+        mongoUrl: process.env.MONGODB_URI,
+        mongoOptions: {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        },
+        // resave all the session on database
+        touchAfter: 24 * 60 * 60 // 1 day
+    }),
+    // sets the cookie expiry time.
+    cookie: { maxAge: 24 * 60 * 60 * 1000 } // 1 day
 }))
 
 // middleware: passport initialize
