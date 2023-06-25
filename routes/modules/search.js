@@ -28,7 +28,7 @@ router.get('/', (req, res, next) => {
                         sort,
                         keywords,
                         search: 'search',
-                        javascript: 'index.js',
+                        javascript: ['index.js'],
                         restaurants: filterRestaurants
                     })
             }
