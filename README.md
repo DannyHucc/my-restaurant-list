@@ -43,7 +43,7 @@ npm install
 npm i -g nodemon
 ```
 
-6. Set environment variables in .env file according to .env.example
+6. Set environment variables in .env file according to .env.exp
 
 ```
 mkdir .env

@@ -14,7 +14,7 @@ const flash = require('connect-flash')
 const routes = require('./routes')
 require('./config/mongoose')
 const app = express()
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3000
 
 // template engine: express-handlebars
 app.engine('hbs', exphbs({
