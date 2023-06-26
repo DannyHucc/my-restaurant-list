@@ -8,13 +8,14 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
 const session = require('express-session')
-const MongoStore = require('connect-mongo')
+const MongoStore = require('connect-mongo')(session)
+const mongoose = require('mongoose')
 const usePassport = require('config-file/passport')
 const flash = require('connect-flash')
 const routes = require('./routes')
 require('./config/mongoose')
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8080
 
 // template engine: express-handlebars
 app.engine('hbs', exphbs({
@@ -33,8 +34,9 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false, //don't save session if unmodified
     saveUninitialized: true, // don't create session until something stored
-    store: MongoStore.create({ // configure a new connection
+    store: new MongoStore({ // configure a new connection
         mongoUrl: process.env.MONGODB_URI,
+        mongooseConnection: mongoose.connection,
         mongoOptions: {
             useNewUrlParser: true,
             useUnifiedTopology: true
