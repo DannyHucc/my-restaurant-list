@@ -16,7 +16,7 @@ function sweetAlert(event) {
         dangerMode: true
     }).then(check => {
         if (check) {
-            return window.location = 'http://localhost:3000/'
+            window.location.href = "../"
         }
     })
 }
