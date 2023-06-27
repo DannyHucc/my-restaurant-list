@@ -8,7 +8,10 @@ const Restaurants = require('models-file/restaurant')
 
 router.get('/new', (req, res) => {
     const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY
-    res.render('new', { javascript: ['new.js', 'autofill.js'], GOOGLE_API_KEY })
+    res.render('new', {
+        javascript: ['new.js', 'autofill.js'],
+        GOOGLE_API_KEY: GOOGLE_API_KEY
+    })
 })
 
 router.post('/', (req, res, next) => {

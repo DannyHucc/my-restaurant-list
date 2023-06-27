@@ -1,12 +1,12 @@
 const autofillBtn = document.querySelector('.btn-autofill')
 // add autocomplete input by google map api
-const autofillInput = document.querySelector('#autofill')
+const addressText = document.querySelector('#address-text')
 const options = {
     componentRestrictions: { country: "tw" },
     field: ["address_components", "name"],
     types: ["establishment"]
 }
-const autocomplete = new google.maps.places.Autocomplete(autofillInput, options)
+const autocomplete = new google.maps.places.Autocomplete(addressText, options)
 
 // create a map object to call places service
 const map = new google.maps.Map(document.getElementById("map"))
