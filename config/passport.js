@@ -1,3 +1,7 @@
+// env
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+}
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
